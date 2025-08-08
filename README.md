@@ -1,9 +1,9 @@
 # Laravel Package for SitesMonkey Monitoring
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/monkeysoftnl/laravel-sitesmonkey.svg?style=flat-square)](https://packagist.org/packages/monkeysoftnl/laravel-sitesmonkey)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/monkeysoft/laravel-sitesmonkey.svg?style=flat-square)](https://packagist.org/packages/monkeysoft/laravel-sitesmonkey)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/monkeysoftnl/laravel-sitesmonkey/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/monkeysoftnl/laravel-sitesmonkey/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/monkeysoftnl/laravel-sitesmonkey/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/monkeysoftnl/laravel-sitesmonkey/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/monkeysoftnl/laravel-sitesmonkey.svg?style=flat-square)](https://packagist.org/packages/monkeysoftnl/laravel-sitesmonkey)
+[![Total Downloads](https://img.shields.io/packagist/dt/monkeysoft/laravel-sitesmonkey.svg?style=flat-square)](https://packagist.org/packages/monkeysoft/laravel-sitesmonkey)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
