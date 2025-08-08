@@ -10,14 +10,32 @@ class SitesMonkeyLoggerHandler extends AbstractProcessingHandler
     public function write(\Monolog\LogRecord $record): void
     {
         try {
-            Http::post(config('sitesmonkey.api_url'), [
+            if (!config('sitesmonkey.enabled')) {
+                return; // Skip logging if SitesMonkey is not enabled
+            }
+            // Ensure the required configuration is set
+            if (empty(config('sitesmonkey.website_id')) || empty(config('sitesmonkey.website_secret'))) {
+                return; // Skip logging if website ID or secret key is not set
+            }
+
+            Http::globalOptions([
+                'timeout' => 5, /* in seconds (default 30s) */
+            ]);
+
+            $logginUrl = sprintf(
+                '%s/api/v1/create-error-message',
+                config('sitesmonkey.api_url')
+            );
+
+            // Send the log record to the SitesMonkey API
+            $result = Http::post($logginUrl, [
                 'website_id' => config('sitesmonkey.website_id'),
                 'website_secret_key' => config('sitesmonkey.website_secret'),
                 'error_code' => $record->level->value,
-                'error_data' => $record->context,
+                'error_data' => json_encode($record->context),
                 'category' => $record->channel,
-                'error_message' => $record->formatted,
-            ]);
+                'error_message' => $record->message,
+            ])->throw()->json();
         } catch (\Exception $e) {
             // Handle any exceptions that occur during the HTTP request
             // You might want to log this exception or handle it in some way

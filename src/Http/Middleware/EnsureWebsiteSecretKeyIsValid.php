@@ -15,24 +15,15 @@ class EnsureWebsiteSecretKeyIsValid
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $inputSecretKey = $request->input('website_secret_key');
-        $inputWebsiteId = $request->input('website_id');
+        $token = $request->bearerToken();
 
         // Check if the secret key and website id are empty
-        if (empty($inputWebsiteId)) {
-            return response()->json(['error' => 'Invalid credentials'], 401);
-        }
-        if (empty($inputSecretKey)) {
-            return response()->json(['error' => 'Invalid credentials'], 401);
-        }
-
-        // Check if website_id is set to the configured website ID
-        if (! $inputWebsiteId == config('sitesmonkey.website_id')) {
+        if (empty($token)) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
         // Check if the secret key is valid
-        if (! $inputSecretKey == config('sitesmonkey.website_secret_key')) {
+        if (! $token === config('sitesmonkey.website_secret')) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
