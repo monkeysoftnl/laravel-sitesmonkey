@@ -25,7 +25,6 @@ class StatusController extends \MonkeySoft\SitesMonkey\Http\Controllers\Controll
             }
         }
 
-
         return response()->json([
             'website_name' => config('app.name', 'Unknown Application'),
             'website_description' => config('app.description', 'No description provided.'),

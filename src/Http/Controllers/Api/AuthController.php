@@ -14,7 +14,7 @@ class AuthController extends \MonkeySoft\SitesMonkey\Http\Controllers\Controller
     public function getUsers(\Illuminate\Http\Request $request): \Illuminate\Http\JsonResponse
     {
         $model = config('sitesmonkey.auth.model');
-        if (!class_exists($model)) {
+        if (! class_exists($model)) {
             return response()->json(['error' => 'User model not found'], 500);
         }
 
@@ -22,7 +22,7 @@ class AuthController extends \MonkeySoft\SitesMonkey\Http\Controllers\Controller
         $users = [];
 
         foreach ($dbUsers as $dbUser) {
-            $user = new stdClass();
+            $user = new stdClass;
             $user->user_login = $dbUser->email ?? 'Unknown';
             $user->display_name = $dbUser->fullName ?? 'Unknown User';
             $users[] = $user;
@@ -34,7 +34,7 @@ class AuthController extends \MonkeySoft\SitesMonkey\Http\Controllers\Controller
     public function login(\Illuminate\Http\Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
         $model = config('sitesmonkey.auth.model');
-        if (!class_exists($model)) {
+        if (! class_exists($model)) {
             return response()->json(['error' => 'User model not found'], 500);
         }
 
@@ -56,16 +56,16 @@ class AuthController extends \MonkeySoft\SitesMonkey\Http\Controllers\Controller
             return response()->json(['error' => $response['error']], 401);
         }
 
-        if (!isset($response['success']) || !$response['success']) {
+        if (! isset($response['success']) || ! $response['success']) {
             return response()->json(['error' => 'Invalid token or action'], 401);
         }
 
         $actionData = $request->input('action_data');
-        $actionData = base64_decode( $actionData );
-        $username   = json_decode( $actionData )->username;
+        $actionData = base64_decode($actionData);
+        $username = json_decode($actionData)->username;
 
         $dbUser = $model::firstWhere(['email' => $username]);
-        if (!$dbUser) {
+        if (! $dbUser) {
             return response()->json(['error' => 'User not found'], 404);
         }
 

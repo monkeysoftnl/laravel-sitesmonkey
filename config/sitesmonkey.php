@@ -9,5 +9,5 @@ return [
     'auth' => [
         'model' => env('SITESMONKEY_AUTH_MODEL', '\App\Models\User'),
         'route_after_login' => env('SITESMONKEY_AUTH_ROUTE_AFTER_LOGIN', 'dashboard'),
-    ]
+    ],
 ];

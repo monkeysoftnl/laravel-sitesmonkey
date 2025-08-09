@@ -10,7 +10,7 @@ class SitesMonkeyLoggerHandler extends AbstractProcessingHandler
     public function write(\Monolog\LogRecord $record): void
     {
         try {
-            if (!config('sitesmonkey.enabled')) {
+            if (! config('sitesmonkey.enabled')) {
                 return; // Skip logging if SitesMonkey is not enabled
             }
             // Ensure the required configuration is set
