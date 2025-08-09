@@ -17,7 +17,7 @@ class SitesMonkeyServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-sitesmonkey')
-            ->hasConfigFile()
+            ->hasConfigFile('sitesmonkey')
             ->hasRoute('api')
             ->hasCommand(SitesMonkeyCommand::class);
     }

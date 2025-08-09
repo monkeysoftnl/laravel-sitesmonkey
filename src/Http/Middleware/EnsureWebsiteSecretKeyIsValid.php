@@ -23,7 +23,7 @@ class EnsureWebsiteSecretKeyIsValid
         }
 
         // Check if the secret key is valid
-        if (! $token === config('sitesmonkey.website_secret')) {
+        if ($token !== config('sitesmonkey.website_secret')) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 

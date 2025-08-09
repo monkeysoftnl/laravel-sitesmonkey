@@ -23,13 +23,6 @@ You can install the package via composer:
 composer require monkeysoftnl/laravel-sitesmonkey
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-sitesmonkey-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
@@ -40,20 +33,26 @@ This is the contents of the published config file:
 
 ```php
 return [
+    'enabled' => env('SITESMONKEY_ENABLED', true),
+    'website_id' => env('SITESMONKEY_WEBSITE_ID', ''),
+    'website_secret' => env('SITESMONKEY_SECRET_KEY', ''),
+    'api_url' => env('SITESMONKEY_API_URL', 'https://api.sitesmonkey.com'),
+    //
+    'auth' => [
+        'model' => env('SITESMONKEY_AUTH_MODEL', '\App\Models\User'),
+        'route_after_login' => env('SITESMONKEY_AUTH_ROUTE_AFTER_LOGIN', 'dashboard'),
+    ]
 ];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-sitesmonkey-views"
 ```
 
 ## Usage
 
+Add SitesMonkey to your logging configuration in `config/logging.php`:
 ```php
-$sitesMonkey = new MonkeySoft\SitesMonkey();
-echo $sitesMonkey->echoPhrase('Hello, MonkeySoft!');
+        'sitesMonkey' => [
+            'driver' => 'custom',
+            'via' => \MonkeySoft\SitesMonkey\Logging\SitesMonkeyLogger::class,
+        ],
 ```
 
 ## Testing
