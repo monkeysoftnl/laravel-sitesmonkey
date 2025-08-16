@@ -17,8 +17,13 @@ class SitesMonkeyServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-sitesmonkey')
-            ->hasConfigFile('sitesmonkey')
+            ->hasConfigFile()
             ->hasRoute('api')
             ->hasCommand(SitesMonkeyCommand::class);
+
+        $events = $this->app->make(\Illuminate\Contracts\Events\Dispatcher::class);
+        $events->listen(\Illuminate\Auth\Events\Login::class,
+            \MonkeySoft\SitesMonkey\Listeners\UserIsLoggedIn::class
+        );
     }
 }
