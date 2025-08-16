@@ -32,7 +32,7 @@ class SitesMonkeyLoggerHandler extends AbstractProcessingHandler
                 'website_id' => config('sitesmonkey.website_id'),
                 'website_secret_key' => config('sitesmonkey.website_secret'),
                 'error_code' => $record->level->value,
-                'error_data' => json_encode($record->context),
+                'error_data' => (string) $record->context['exception'],
                 'category' => $record->channel,
                 'error_message' => $record->message,
             ])->throw()->json();
