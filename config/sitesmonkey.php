@@ -10,5 +10,5 @@ return [
         'model' => env('SITESMONKEY_AUTH_MODEL', '\App\Models\User'),
         'route_after_login' => env('SITESMONKEY_AUTH_ROUTE_AFTER_LOGIN', 'dashboard'),
     ],
-    'minimal_log_level' => env('SITESMONKEY_MINIMAL_LOG_LEVEL', 400)
+    'minimal_log_level' => env('SITESMONKEY_MINIMAL_LOG_LEVEL', 400),
 ];
