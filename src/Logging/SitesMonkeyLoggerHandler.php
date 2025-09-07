@@ -18,6 +18,10 @@ class SitesMonkeyLoggerHandler extends AbstractProcessingHandler
                 return; // Skip logging if website ID or secret key is not set
             }
 
+            if ($record->level->value < config('sitesmonkey.minimal_log_level')) {
+                return; // Skip logging if the log level is below the minimal threshold
+            }
+
             Http::globalOptions([
                 'timeout' => 5, /* in seconds (default 30s) */
             ]);
