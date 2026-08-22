@@ -2,17 +2,21 @@
 
 namespace MonkeySoft\SitesMonkey\Http\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use MonkeySoft\SitesMonkey\Http\Controllers\Controller;
 use stdClass;
 
-class AuthController extends \MonkeySoft\SitesMonkey\Http\Controllers\Controller
+class AuthController extends Controller
 {
     /**
      * List the accounts SitesMonkey may impersonate.
      */
-    public function getUsers(\Illuminate\Http\Request $request): \Illuminate\Http\JsonResponse
+    public function getUsers(Request $request): JsonResponse
     {
         $model = config('sitesmonkey.auth.model');
         if (! class_exists($model)) {
@@ -31,7 +35,7 @@ class AuthController extends \MonkeySoft\SitesMonkey\Http\Controllers\Controller
         return response()->json($users);
     }
 
-    public function login(\Illuminate\Http\Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+    public function login(Request $request): JsonResponse|RedirectResponse
     {
         $model = config('sitesmonkey.auth.model');
         if (! class_exists($model)) {
