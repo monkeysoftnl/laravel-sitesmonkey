@@ -22,8 +22,9 @@ class EnsureWebsiteSecretKeyIsValid
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
-        // Check if the secret key is valid
-        if ($token !== config('sitesmonkey.website_secret')) {
+        // Check if the secret key is valid — constant time, so the comparison
+        // cannot be used to recover the key one character at a time.
+        if (! hash_equals((string) config('sitesmonkey.website_secret'), (string) $token)) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 

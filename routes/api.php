@@ -9,4 +9,4 @@ Route::get('/api/v1/sitesmonkey/users', [\MonkeySoft\SitesMonkey\Http\Controller
     ->name('v1-sitesmonkey-users')->middleware(\MonkeySoft\SitesMonkey\Http\Middleware\EnsureWebsiteSecretKeyIsValid::class);
 
 Route::get('/v1/sitesmonkey/login', [\MonkeySoft\SitesMonkey\Http\Controllers\Api\AuthController::class, 'login'])
-    ->name('v1-sitesmonkey-login');
+    ->name('v1-sitesmonkey-login')->middleware('throttle:10,1');
