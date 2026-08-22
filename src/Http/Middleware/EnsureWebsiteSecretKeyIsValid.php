@@ -15,7 +15,9 @@ class EnsureWebsiteSecretKeyIsValid
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $token = $request->bearerToken();
+        // X-SitesMonkey-Key first: an OAuth layer in front of the app may claim
+        // the Authorization header before this middleware ever sees it.
+        $token = $request->header('X-SitesMonkey-Key') ?: $request->bearerToken();
 
         // Check if the secret key and website id are empty
         if (empty($token)) {
