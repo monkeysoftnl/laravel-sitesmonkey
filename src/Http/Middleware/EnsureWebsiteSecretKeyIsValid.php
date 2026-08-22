@@ -11,19 +11,22 @@ class EnsureWebsiteSecretKeyIsValid
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $token = $request->bearerToken();
+        // X-SitesMonkey-Key first: an OAuth layer in front of the app may claim
+        // the Authorization header before this middleware ever sees it.
+        $token = $request->header('X-SitesMonkey-Key') ?: $request->bearerToken();
 
         // Check if the secret key and website id are empty
         if (empty($token)) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
-        // Check if the secret key is valid
-        if ($token !== config('sitesmonkey.website_secret')) {
+        // Check if the secret key is valid — constant time, so the comparison
+        // cannot be used to recover the key one character at a time.
+        if (! hash_equals((string) config('sitesmonkey.website_secret'), (string) $token)) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 

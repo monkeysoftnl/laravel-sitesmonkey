@@ -2,7 +2,10 @@
 
 namespace MonkeySoft\SitesMonkey;
 
+use Illuminate\Auth\Events\Login;
+use Illuminate\Contracts\Events\Dispatcher;
 use MonkeySoft\SitesMonkey\Commands\SitesMonkeyCommand;
+use MonkeySoft\SitesMonkey\Listeners\UserIsLoggedIn;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -21,9 +24,9 @@ class SitesMonkeyServiceProvider extends PackageServiceProvider
             ->hasRoute('api')
             ->hasCommand(SitesMonkeyCommand::class);
 
-        $events = $this->app->make(\Illuminate\Contracts\Events\Dispatcher::class);
-        $events->listen(\Illuminate\Auth\Events\Login::class,
-            \MonkeySoft\SitesMonkey\Listeners\UserIsLoggedIn::class
+        $events = $this->app->make(Dispatcher::class);
+        $events->listen(Login::class,
+            UserIsLoggedIn::class
         );
     }
 }

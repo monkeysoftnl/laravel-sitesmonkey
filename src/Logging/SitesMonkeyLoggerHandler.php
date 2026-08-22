@@ -4,10 +4,11 @@ namespace MonkeySoft\SitesMonkey\Logging;
 
 use Illuminate\Support\Facades\Http;
 use Monolog\Handler\AbstractProcessingHandler;
+use Monolog\LogRecord;
 
 class SitesMonkeyLoggerHandler extends AbstractProcessingHandler
 {
-    public function write(\Monolog\LogRecord $record): void
+    public function write(LogRecord $record): void
     {
         try {
             if (! config('sitesmonkey.enabled')) {

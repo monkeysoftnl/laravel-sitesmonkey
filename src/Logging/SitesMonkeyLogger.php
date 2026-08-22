@@ -2,14 +2,16 @@
 
 namespace MonkeySoft\SitesMonkey\Logging;
 
+use Monolog\Logger;
+
 class SitesMonkeyLogger
 {
     /**
      * Create a custom Monolog instance.
      */
-    public function __invoke(array $config): \Monolog\Logger
+    public function __invoke(array $config): Logger
     {
-        return new \Monolog\Logger(
+        return new Logger(
             config('app.name'),
             [
                 new SitesMonkeyLoggerHandler,

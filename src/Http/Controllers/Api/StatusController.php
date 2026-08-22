@@ -2,12 +2,16 @@
 
 namespace MonkeySoft\SitesMonkey\Http\Controllers\Api;
 
-class StatusController extends \MonkeySoft\SitesMonkey\Http\Controllers\Controller
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use MonkeySoft\SitesMonkey\Http\Controllers\Controller;
+
+class StatusController extends Controller
 {
     /**
      * Save the status message.
      */
-    public function getStatus(\Illuminate\Http\Request $request): \Illuminate\Http\JsonResponse
+    public function getStatus(Request $request): JsonResponse
     {
         $mysqlVersion = null;
         $databaseConnection = config('database.default');
