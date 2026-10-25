@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/Users/stephan/Projects/MonkeySoft/laravel-sitesmonkey/phpunit.xml" tests="9" assertions="11" errors="0" failures="0" skipped="0" time="0.301896">
+    <testsuite name="VendorName Test Suite" tests="9" assertions="11" errors="0" failures="0" skipped="0" time="0.301896">
+      <testsuite name="Tests\ErrorFilterTest" file="tests/ErrorFilterTest.php" tests="8" assertions="8" errors="0" failures="0" skipped="0" time="0.199425">
+        <testcase name="it sends every error when throttling is turned off" file="tests/ErrorFilterTest.php::it sends every error when throttling is turned off" class="Tests\ErrorFilterTest" classname="Tests.ErrorFilterTest" assertions="1" time="0.161372"/>
+        <testcase name="it still sends a Livewire crash of a logged in user and the same crash elsewhere" file="tests/ErrorFilterTest.php::it still sends a Livewire crash of a logged in user and the same crash elsewhere" class="Tests\ErrorFilterTest" classname="Tests.ErrorFilterTest" assertions="1" time="0.014447"/>
+        <testcase name="it can send Livewire payload crashes again when the option is turned off" file="tests/ErrorFilterTest.php::it can send Livewire payload crashes again when the option is turned off" class="Tests\ErrorFilterTest" classname="Tests.ErrorFilterTest" assertions="1" time="0.003184"/>
+        <testcase name="it sends the same error only once within the throttle period" file="tests/ErrorFilterTest.php::it sends the same error only once within the throttle period" class="Tests\ErrorFilterTest" classname="Tests.ErrorFilterTest" assertions="1" time="0.003280"/>
+        <testcase name="it skips a crash caused by a broken Livewire payload from a visitor who is not logged in" file="tests/ErrorFilterTest.php::it skips a crash caused by a broken Livewire payload from a visitor who is not logged in" class="Tests\ErrorFilterTest" classname="Tests.ErrorFilterTest" assertions="1" time="0.008690"/>
+        <testcase name="it sends an error" file="tests/ErrorFilterTest.php::it sends an error" class="Tests\ErrorFilterTest" classname="Tests.ErrorFilterTest" assertions="1" time="0.002913"/>
+        <testcase name="it skips ignored exception classes and message patterns" file="tests/ErrorFilterTest.php::it skips ignored exception classes and message patterns" class="Tests\ErrorFilterTest" classname="Tests.ErrorFilterTest" assertions="1" time="0.002563"/>
+        <testcase name="it sends a record without an exception instead of failing silently" file="tests/ErrorFilterTest.php::it sends a record without an exception instead of failing silently" class="Tests\ErrorFilterTest" classname="Tests.ErrorFilterTest" assertions="1" time="0.002977"/>
+      </testsuite>
+      <testsuite name="Tests\ArchTest" file="tests/ArchTest.php" tests="1" assertions="3" errors="0" failures="0" skipped="0" time="0.102471">
+        <testcase name="it will not use debugging functions" file="tests/ArchTest.php::it will not use debugging functions" class="Tests\ArchTest" classname="Tests.ArchTest" assertions="3" time="0.102471"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

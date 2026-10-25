@@ -23,6 +23,10 @@ class SitesMonkeyLoggerHandler extends AbstractProcessingHandler
                 return; // Skip logging if the log level is below the minimal threshold
             }
 
+            if (! (new ErrorFilter)->shouldReport($record)) {
+                return; // Skip bot noise and errors that were just reported
+            }
+
             Http::globalOptions([
                 'timeout' => 5, /* in seconds (default 30s) */
             ]);
@@ -37,7 +41,7 @@ class SitesMonkeyLoggerHandler extends AbstractProcessingHandler
                 'website_id' => config('sitesmonkey.website_id'),
                 'website_secret_key' => config('sitesmonkey.website_secret'),
                 'error_code' => $record->level->value,
-                'error_data' => (string) $record->context['exception'],
+                'error_data' => (string) ($record->context['exception'] ?? ''),
                 'category' => $record->channel,
                 'error_message' => $record->message,
             ])->throw()->json();

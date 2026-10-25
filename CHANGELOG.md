@@ -51,6 +51,13 @@ Laravel 13 suppo
 
 **Full Changelog**: https://github.com/monkeysoftnl/laravel-sitesmonkey/compare/v2025.09.05...v0.0.5
 
+## Unreleased
+
+* Skip crashes that a visitor who is not logged in causes with a broken request to Livewire (bots); option `ignore_guest_livewire_payload_errors`.
+* Send the same error at most once per `throttle_minutes` (default 10).
+* New `ignore.exceptions` and `ignore.messages` settings to never send certain errors.
+* A log record without an exception no longer fails silently.
+
 ## v0.0.4 - 2025-09-07
 
 ### What's Changed

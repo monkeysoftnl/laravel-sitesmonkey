@@ -19,4 +19,17 @@ return [
         'impersonatable_query' => null,
     ],
     'minimal_log_level' => env('SITESMONKEY_MINIMAL_LOG_LEVEL', 400),
+
+    // Errors that are never sent: exception classes (and their subclasses) and regular expressions that are matched
+    // against the log message and the exception message.
+    'ignore' => [
+        'exceptions' => [],
+        'messages' => [],
+    ],
+
+    // Skip crashes that a visitor who is not logged in causes with a broken request to Livewire (bots).
+    'ignore_guest_livewire_payload_errors' => env('SITESMONKEY_IGNORE_GUEST_LIVEWIRE_ERRORS', true),
+
+    // The same error (same exception and message) is sent at most once per this many minutes. 0 sends every one.
+    'throttle_minutes' => env('SITESMONKEY_THROTTLE_MINUTES', 10),
 ];
