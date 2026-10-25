@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-sitesmonkey` will be documented in this file.
 
+## v1.0.1 - 2026-10-25
+
+* Skip crashes that a visitor who is not logged in causes with a broken request to Livewire (bots); option `ignore_guest_livewire_payload_errors`.
+* Send the same error at most once per `throttle_minutes` (default 10).
+* New `ignore.exceptions` and `ignore.messages` settings to never send certain errors.
+* A log record without an exception no longer fails silently.
+
 ## v0.0.5 - 2026-04-12
 
 Laravel 13 suppo
@@ -50,13 +57,6 @@ Laravel 13 suppo
 * @steffjenl made their first contribution in https://github.com/monkeysoftnl/laravel-sitesmonkey/pull/5
 
 **Full Changelog**: https://github.com/monkeysoftnl/laravel-sitesmonkey/compare/v2025.09.05...v0.0.5
-
-## Unreleased
-
-* Skip crashes that a visitor who is not logged in causes with a broken request to Livewire (bots); option `ignore_guest_livewire_payload_errors`.
-* Send the same error at most once per `throttle_minutes` (default 10).
-* New `ignore.exceptions` and `ignore.messages` settings to never send certain errors.
-* A log record without an exception no longer fails silently.
 
 ## v0.0.4 - 2025-09-07
 
