@@ -1,0 +1,6 @@
+lockfileVersion: 5.4
+dependencies:
+  express: 4.18.2
+packages:
+  /express/4.18.2:
+    dev: false

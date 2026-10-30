@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "type": "laravel",
+  "collected_at": "2026-01-01T00:00:00+00:00",
+  "php_version": "8.4.1",
+  "laravel_version": "11.9.0",
+  "composer_packages": [
+    {"name": "laravel/framework", "version": "v11.9.0"}
+  ],
+  "php_extensions": [
+    {"name": "json", "version": "8.4.1"}
+  ],
+  "site_id": "0f8fad5b-d9cb-469f-a165-70867728950e",
+  "lockfile_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "node_packages": [
+    {"name": "lodash", "version": "4.17.20", "package_manager": "npm"}
+  ],
+  "last_successful_inventory_at": "2026-01-01T00:00:00+00:00"
+}

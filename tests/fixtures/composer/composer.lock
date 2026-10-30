@@ -1,0 +1,12 @@
+{
+    "_readme": ["fixture"],
+    "content-hash": "abc",
+    "packages": [
+        {"name": "laravel/framework", "version": "v11.9.0", "source": {"type": "git", "url": "https://example.test/secret-repo.git"}},
+        {"name": "Monolog/Monolog", "version": "3.5.0"},
+        {"name": "vendor/branch-pinned", "version": "dev-main"}
+    ],
+    "packages-dev": [
+        {"name": "phpunit/phpunit", "version": "11.0.0"}
+    ]
+}

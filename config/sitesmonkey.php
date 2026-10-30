@@ -32,4 +32,27 @@ return [
 
     // The same error (same exception and message) is sent at most once per this many minutes. 0 sends every one.
     'throttle_minutes' => env('SITESMONKEY_THROTTLE_MINUTES', 10),
+
+    // Vulnerability monitoring: the list of installed packages is sent to SitesMonkey every hour, signed with a key that
+    // belongs to this website. Create the key in SitesMonkey (Website > Connector key) and put it in .env.
+    'inventory' => [
+        'enabled' => env('SITESMONKEY_INVENTORY_ENABLED', true),
+        'key_id' => env('SITESMONKEY_INVENTORY_KEY_ID', ''),
+        'key_secret' => env('SITESMONKEY_INVENTORY_KEY_SECRET', ''),
+
+        // Cron expression of the push. Null picks a fixed minute of every hour that is different per website.
+        'schedule' => env('SITESMONKEY_INVENTORY_CRON'),
+
+        // Only these PHP extensions are reported (name and version).
+        'php_extensions' => [
+            'bcmath', 'curl', 'dom', 'exif', 'fileinfo', 'gd', 'gmp', 'iconv', 'imagick', 'intl', 'libxml', 'mbstring',
+            'mysqlnd', 'openssl', 'pcre', 'pdo_mysql', 'pdo_pgsql', 'pdo_sqlite', 'redis', 'sodium', 'sqlite3', 'xml',
+            'xmlreader', 'xmlwriter', 'zend-opcache', 'zip', 'zlib',
+        ],
+
+        // Node lockfiles (relative to the application) whose production packages are part of what you run, for
+        // example ['package-lock.json']. Leave empty when Node is only used to build assets. Supports
+        // package-lock.json, npm-shrinkwrap.json, yarn.lock and pnpm-lock.yaml (YAML files need symfony/yaml).
+        'node_lockfiles' => [],
+    ],
 ];
