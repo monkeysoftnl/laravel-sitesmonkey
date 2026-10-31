@@ -2,7 +2,7 @@
 
 All notable changes to `laravel-sitesmonkey` will be documented in this file.
 
-## Unreleased
+## v1.0.2 - 2026-10-31
 
 * Vulnerability monitoring: sends SitesMonkey the Laravel and PHP version, the production packages of `composer.lock`, an allowlist of PHP extensions and, when configured, the production packages of Node lockfiles (`package-lock.json`, `npm-shrinkwrap.json`, `yarn.lock`, `pnpm-lock.yaml`). Hourly through the scheduler, or with `php artisan sitesmonkey:inventory:push` (`--dry-run` shows what would be sent).
 * Every inventory request is signed with a key that belongs to the website (HMAC with timestamp and one-time nonce), sent over HTTPS without following redirects. Never sent: `.env`, configuration values, credentials, source code.
