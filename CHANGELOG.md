@@ -2,10 +2,15 @@
 
 All notable changes to `laravel-sitesmonkey` will be documented in this file.
 
+## Unreleased
+
+* Breaking for v1.0.2 users: the inventory is signed with the website id and secret key the package already uses (`SITESMONKEY_WEBSITE_ID` and `SITESMONKEY_SECRET_KEY`). The separate connector key is gone, so remove `SITESMONKEY_INVENTORY_KEY_ID` and `SITESMONKEY_INVENTORY_KEY_SECRET` from `.env`; there is nothing new to create in SitesMonkey.
+* The optional settings that remain are `SITESMONKEY_INVENTORY_ENABLED` and `SITESMONKEY_INVENTORY_CRON`.
+
 ## v1.0.2 - 2026-10-31
 
 * Vulnerability monitoring: sends SitesMonkey the Laravel and PHP version, the production packages of `composer.lock`, an allowlist of PHP extensions and, when configured, the production packages of Node lockfiles (`package-lock.json`, `npm-shrinkwrap.json`, `yarn.lock`, `pnpm-lock.yaml`). Hourly through the scheduler, or with `php artisan sitesmonkey:inventory:push` (`--dry-run` shows what would be sent).
-* Every inventory request is signed with a key that belongs to the website (HMAC with timestamp and one-time nonce), sent over HTTPS without following redirects. Never sent: `.env`, configuration values, credentials, source code.
+* Every inventory request is signed with the website id and secret key the package already uses (HMAC with timestamp and one-time nonce); no extra key to create, sent over HTTPS without following redirects. Never sent: `.env`, configuration values, credentials, source code.
 * New route `GET /api/v1/sitesmonkey/inventory` (website secret) for SitesMonkey to fetch the same inventory.
 * New config section `inventory` and environment variables `SITESMONKEY_INVENTORY_*`. `symfony/yaml` is suggested for pnpm and Yarn Berry lockfiles.
 * Fix: "login as" now runs in the `web` middleware group, so the session is started and the login survives the redirect.

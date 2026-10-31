@@ -63,8 +63,6 @@ All settings live in `config/sitesmonkey.php` and can mostly be set through envi
 | `ignore_guest_livewire_payload_errors` | `SITESMONKEY_IGNORE_GUEST_LIVEWIRE_ERRORS` | `true` | Skip crashes caused by guests posting broken Livewire payloads (bots). |
 | `throttle_minutes` | `SITESMONKEY_THROTTLE_MINUTES` | `10` | The same error is sent at most once per this many minutes. `0` sends every one. |
 | `inventory.enabled` | `SITESMONKEY_INVENTORY_ENABLED` | `true` | Turns vulnerability monitoring on or off. |
-| `inventory.key_id` | `SITESMONKEY_INVENTORY_KEY_ID` | `''` | Id of the connector key (`smk_...`). |
-| `inventory.key_secret` | `SITESMONKEY_INVENTORY_KEY_SECRET` | `''` | Secret of the connector key. |
 | `inventory.schedule` | `SITESMONKEY_INVENTORY_CRON` | `null` | Cron expression for the push. `null` picks a fixed minute of every hour, different per website. |
 | `inventory.php_extensions` | – | short allowlist | PHP extensions whose name and version are reported. |
 | `inventory.node_lockfiles` | – | `[]` | Node lockfiles (relative to the application) whose production packages are reported. |
@@ -127,13 +125,12 @@ It returns the application name, description and version (`app.name`, `app.descr
 
 The package sends SitesMonkey the list of software your application runs, so SitesMonkey can warn you when a package has a known vulnerability. It is sent every hour (at a fixed minute that is different for every website) through the Laravel scheduler, so make sure `php artisan schedule:run` runs every minute. The scheduled task runs in the background, on one server, and never overlaps itself.
 
-1. In SitesMonkey, create a connector key for the website (Website > Connector key). The secret is shown once.
-2. Add the key to your `.env`:
+1. Nothing new to create: the inventory is signed with the website id and secret key you already set for this package.
+2. Make sure your `.env` has them:
 
 ```dotenv
 SITESMONKEY_WEBSITE_ID=<website id from SitesMonkey>
-SITESMONKEY_INVENTORY_KEY_ID=smk_...
-SITESMONKEY_INVENTORY_KEY_SECRET=...
+SITESMONKEY_SECRET_KEY=<secret key from SitesMonkey>
 ```
 
 3. Check what will be sent, then send it once:
@@ -195,7 +192,7 @@ SitesMonkey can also fetch the same list from `GET /api/v1/sitesmonkey/inventory
 
 | Message | Cause |
 | --- | --- |
-| SitesMonkey inventory is not configured | `SITESMONKEY_WEBSITE_ID`, `SITESMONKEY_INVENTORY_KEY_ID` or `SITESMONKEY_INVENTORY_KEY_SECRET` is missing, or inventory is disabled. |
+| SitesMonkey inventory is not configured | `SITESMONKEY_WEBSITE_ID` or `SITESMONKEY_SECRET_KEY` is missing, or inventory is disabled. |
 | The installed packages could not be determined | No readable `composer.lock` or Composer installed data; nothing was sent. |
 | Another inventory push is already running | A push holds the cache lock (max. 5 minutes). |
 | SitesMonkey did not accept the inventory (HTTP …) | Wrong key, revoked key, clock out of sync, or a payload SitesMonkey rejects. |

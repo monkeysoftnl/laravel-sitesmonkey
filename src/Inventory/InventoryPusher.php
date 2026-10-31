@@ -25,8 +25,7 @@ class InventoryPusher
     {
         return config('sitesmonkey.inventory.enabled') === true
             && (string) config('sitesmonkey.website_id') !== ''
-            && (string) config('sitesmonkey.inventory.key_id') !== ''
-            && (string) config('sitesmonkey.inventory.key_secret') !== '';
+            && (string) config('sitesmonkey.website_secret') !== '';
     }
 
     /**
@@ -74,10 +73,9 @@ class InventoryPusher
         try {
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
-                'X-SitesMonkey-Key-Id' => (string) config('sitesmonkey.inventory.key_id'),
                 'X-SitesMonkey-Timestamp' => $timestamp,
                 'X-SitesMonkey-Nonce' => $nonce,
-                'X-SitesMonkey-Signature' => 'sha256='.hash_hmac('sha256', $canonical, (string) config('sitesmonkey.inventory.key_secret')),
+                'X-SitesMonkey-Signature' => 'sha256='.hash_hmac('sha256', $canonical, (string) config('sitesmonkey.website_secret')),
             ])
                 ->withBody($body, 'application/json')
                 ->connectTimeout(10)

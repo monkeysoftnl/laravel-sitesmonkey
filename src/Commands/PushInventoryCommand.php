@@ -33,7 +33,7 @@ class PushInventoryCommand extends Command
         }
 
         $this->error(match ($result['reason']) {
-            'not_configured' => 'SitesMonkey inventory is not configured. Set SITESMONKEY_WEBSITE_ID, SITESMONKEY_INVENTORY_KEY_ID and SITESMONKEY_INVENTORY_KEY_SECRET.',
+            'not_configured' => 'SitesMonkey inventory is not configured. Set SITESMONKEY_WEBSITE_ID and SITESMONKEY_SECRET_KEY.',
             'collection_failed' => 'The installed packages could not be determined, so nothing was sent.',
             'locked' => 'Another inventory push is already running.',
             'rejected' => 'SitesMonkey did not accept the inventory (HTTP '.$result['http_status'].').',
