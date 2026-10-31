@@ -8,6 +8,8 @@ All notable changes to `laravel-sitesmonkey` will be documented in this file.
 * Every inventory request is signed with a key that belongs to the website (HMAC with timestamp and one-time nonce), sent over HTTPS without following redirects. Never sent: `.env`, configuration values, credentials, source code.
 * New route `GET /api/v1/sitesmonkey/inventory` (website secret) for SitesMonkey to fetch the same inventory.
 * New config section `inventory` and environment variables `SITESMONKEY_INVENTORY_*`. `symfony/yaml` is suggested for pnpm and Yarn Berry lockfiles.
+* Fix: "login as" now runs in the `web` middleware group, so the session is started and the login survives the redirect.
+* Fix: sending an error or a login no longer replaces the global HTTP client options of the application (it set a 5 second timeout for every request); the timeout now only applies to the SitesMonkey request.
 
 ## v1.0.1 - 2026-10-25
 

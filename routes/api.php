@@ -15,5 +15,7 @@ Route::get('/api/v1/sitesmonkey/inventory', [InventoryController::class, 'show']
 Route::get('/api/v1/sitesmonkey/users', [AuthController::class, 'getUsers'])
     ->name('v1-sitesmonkey-users')->middleware(EnsureWebsiteSecretKeyIsValid::class);
 
+// Package routes are loaded without a middleware group; login-as needs the web group so the session (and its cookie)
+// is started and the login survives the redirect.
 Route::get('/v1/sitesmonkey/login', [AuthController::class, 'login'])
-    ->name('v1-sitesmonkey-login')->middleware('throttle:10,1');
+    ->name('v1-sitesmonkey-login')->middleware(['web', 'throttle:10,1']);

@@ -27,17 +27,13 @@ class SitesMonkeyLoggerHandler extends AbstractProcessingHandler
                 return; // Skip bot noise and errors that were just reported
             }
 
-            Http::globalOptions([
-                'timeout' => 5, /* in seconds (default 30s) */
-            ]);
-
             $logginUrl = sprintf(
                 '%s/api/v1/create-error-message',
                 config('sitesmonkey.api_url')
             );
 
             // Send the log record to the SitesMonkey API
-            $result = Http::post($logginUrl, [
+            $result = Http::timeout(5)->post($logginUrl, [
                 'website_id' => config('sitesmonkey.website_id'),
                 'website_secret_key' => config('sitesmonkey.website_secret'),
                 'error_code' => $record->level->value,

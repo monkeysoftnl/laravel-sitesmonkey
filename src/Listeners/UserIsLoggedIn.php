@@ -29,17 +29,13 @@ class UserIsLoggedIn
                 return; // Skip logging if website ID or secret key is not set
             }
 
-            Http::globalOptions([
-                'timeout' => 5, /* in seconds (default 30s) */
-            ]);
-
             $logginUrl = sprintf(
                 '%s/api/v1/successful-login',
                 config('sitesmonkey.api_url')
             );
 
             // Send the log record to the SitesMonkey API
-            $result = Http::post($logginUrl, [
+            $result = Http::timeout(5)->post($logginUrl, [
                 'website_id' => config('sitesmonkey.website_id'),
                 'website_secret_key' => config('sitesmonkey.website_secret'),
                 'ip_address' => request()->ip() ?? '',
